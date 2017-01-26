@@ -1,0 +1,24 @@
+{
+  "cartridgeVersion": "0.1.5",
+  "dateGenerated": "25/01/2017",
+  "modules": [
+    {
+      "name": "cartridge-images",
+      "version": "1.0.0",
+      "site": "https://github.com/cartridge/cartridge-images",
+      "task": "cartridge-images/task.js"
+    },
+    {
+      "name": "cartridge-sass",
+      "version": "2.2.2",
+      "site": "https://github.com/cartridge/cartridge-sass",
+      "task": "cartridge-sass/task.js"
+    },
+    {
+      "name": "cartridge-javascript",
+      "version": "1.0.0",
+      "site": "https://github.com/cartridge/cartridge-javascript",
+      "task": "cartridge-javascript/task.js"
+    }
+  ]
+}

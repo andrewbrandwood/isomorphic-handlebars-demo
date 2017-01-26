@@ -1,0 +1,11 @@
+{
+    "metaData": {
+        "siteTitle": "Cartridge, a Front End starting point - Code Computerlove",
+        "siteAuthor": "Code Computerlove",
+        "siteDescription": "Cartridge is produced by Code Computerlove, an award winning digital agency based in Manchester."
+    },
+    "styleguide": {
+        "metaData":"Cartridge Styleguide",
+        "listPageTitle": "Styleguide"
+    }
+}

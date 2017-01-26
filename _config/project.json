@@ -1,0 +1,22 @@
+{
+  "dirs": {
+    "build": "build/_client",
+    "config": "_config",
+    "dest": "public/_client",
+    "src": "_source"
+  },
+  "paths": {
+    "src": {
+      "components": "views/_partials/",
+      "images": "_source/images/",
+      "sass": "_source/styles/",
+      "scripts": "_source/scripts/"
+    },
+    "dest": {
+      "images": "public/_client/images/",
+      "sass": "public/_client/styles/",
+      "scripts": "public/_client/scripts/",
+      "templates": "public/_client/templates"
+    }
+  }
+}

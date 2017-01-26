@@ -1,0 +1,8 @@
+{{> header}}
+<article>
+	<h1>Demo for using handlebars clientside and serverside in unison</h1>
+	<div class="item-list" data-item-list>
+		{{> item-listing/item-listing title="This is a title" description="This is a good description of what this is" linkText="Click Me" }}
+	</div>
+</article>
+{{> footer JS=true}}
