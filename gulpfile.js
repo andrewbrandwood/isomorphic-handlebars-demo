@@ -33,7 +33,7 @@ gulp.task('compile-handlebars', function() {
 			namespace: 'Demo.templates',
 			noRedeclare: true // Avoid duplicate declarations
 		})).pipe(concat('templates.js'))
-		.pipe(gulp.dest('public/_client/templates'));
+		.pipe(gulp.dest('public/templates'));
 });
 
 /* ============================================================ *\
