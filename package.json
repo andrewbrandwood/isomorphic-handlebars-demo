@@ -4,13 +4,10 @@
   "description": "A demo to illustrate how to use handlebars partials in unison clientside & serverside",
   "license": "ISC",
   "scripts": {
-    "start": "node server.js",
-    "test": "mocha"
+    "start": "node server.js"
   },
   "dependencies": {
-    "bluebird": "^3.3.4",
     "body-parser": "^1.11.0",
-    "del": "^2.1.0",
     "express": "^4.11.2",
     "express-handlebars": "^2.0.1",
     "express-json": "^1.0.0",
@@ -22,21 +19,8 @@
     "gulp-handlebars": "^4.0.0",
     "gulp-wrap": "^0.13.0",
     "handlebars": "^4.0.6",
-    "multer": "^1.1.0",
-    "request": "^2.69.0",
     "request-promise": "^2.0.0",
-    "restler": "^3.4.0",
     "rimraf": "^2.5.2",
-    "run-sequence": "^1.1.0",
-    "streamifier": "^0.1.1",
-    "xml2js": "^0.4.16",
-    "xmlbuilder": "^7.0.0",
-    "yargs": "^4.3.2"
-  },
-  "devDependencies": {
-    "cartridge-images": "^1.0.0",
-    "cartridge-javascript": "^1.0.0",
-    "cartridge-node-server": "0.0.6",
-    "cartridge-sass": "^2.2.2"
+    "run-sequence": "^1.1.0"
   }
 }
