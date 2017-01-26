@@ -25,8 +25,6 @@ app.use(logger({path: './logs/logfile.txt'}));
 app.use(json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(methodOverride());
-app.use(require('./middleware/expiry-headers'));
-app.use(require('./middleware/strip-slash'));
 
 // Setup routing
 require('./router')(app);

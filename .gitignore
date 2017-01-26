@@ -10,5 +10,3 @@ logfile.txt
 
 # Dependencies
 node_modules
-public
-_source/styles/*.scss

@@ -4,31 +4,12 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 
-		<title>{{{siteTitle}}}</title>
-		<meta name="description" content="{{{siteDescription}}}" />
-		<meta name="author" content="{{{data.metaData.siteAuthor}}}">
-
-		{{#if showOpenGraph}}
-			{{> open-graph/open-graph }}
-		{{/if}}
-
-		<link rel="canonical" href="{{canonicalUrl}}" />
+		<title>Handlebars Isomorphic Demo</title>
+		<meta name="description" content="" />
+		<meta name="author" content="">
 		<link rel="icon" href="/_client/images/favicons/favicon.ico" type="image/x-icon">
-
-		<!--[if IE 8]>
-	  		<link rel="stylesheet" href="/_client/styles/ie8.css?v={{uuid}}" />
-	  	<![endif]-->
-
-		<!--[if IE 9]>
-	  		<link rel="stylesheet" href="/_client/styles/main.css?v={{uuid}}" type="text/css" />
-	  	<![endif]-->
-
-		<!--[if  !IE]><!-->
-			<link rel="stylesheet" href="/_client/styles/main.css?v={{uuid}}" type="text/css" />
-		<!--<![endif]-->
+		<link rel="stylesheet" href="/_client/styles/main.css" type="text/css" />
 
 	</head>
-	<body class="paper--type-1">
-		{{> tag-manager/tag-manager }}
+	<body>
 		<div class="page-wrapper">
-		{{> site-header/site-header }}

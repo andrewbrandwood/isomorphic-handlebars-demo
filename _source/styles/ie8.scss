@@ -1,0 +1,52 @@
+/* ============================================================ *\
+
+  #MAIN
+
+  Site:        handlebars-demo
+  Author:      Andrew Brandwood
+  packageName: handlebars-demo
+
+/* ============================================================ */
+
+/**
+* CONTENTS
+* 
+* _SETTINGS
+* Variables for colors
+* Global variables
+* Layout these are 'em' widths based on default font size of 16px;
+* IE8 settings
+* 
+* _TOOLS
+* Common Sass mixins
+* Common Sass functions
+* Font declarations and settings
+* 
+* _GENERIC
+* Box-sizing
+* Normalize - sets all elements to a common state regardless of browser.
+* 
+* _ELEMENTS
+* links - styles for links
+* 
+* _OBJECTS
+* Layout - styles for all layout and or grid system
+* Styleguide layout and filler styles.
+*
+*/
+
+
+
+
+@import "/Sites/handlebars-demo/_source/styles/_settings/_settings.colors.scss";
+@import "/Sites/handlebars-demo/_source/styles/_settings/_settings.global.scss";
+@import "/Sites/handlebars-demo/_source/styles/_settings/_settings.layout.scss";
+@import "/Sites/handlebars-demo/_source/styles/_settings/_settings.old-ie-8.scss";
+@import "/Sites/handlebars-demo/_source/styles/_tools/_tools.mixins.scss";
+@import "/Sites/handlebars-demo/_source/styles/_tools/_tools.functions.scss";
+@import "/Sites/handlebars-demo/_source/styles/_tools/_tools.typography.scss";
+@import "/Sites/handlebars-demo/_source/styles/_generic/_generic.box-sizing.scss";
+@import "/Sites/handlebars-demo/_source/styles/_generic/_generic.normalize.scss";
+@import "/Sites/handlebars-demo/_source/styles/_elements/_elements.links.scss";
+@import "/Sites/handlebars-demo/_source/styles/_objects/_objects.layout.scss";
+@import "/Sites/handlebars-demo/_source/styles/_objects/_objects.styleguide.scss";

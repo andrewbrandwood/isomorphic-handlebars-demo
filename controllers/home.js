@@ -1,6 +1,5 @@
 'use strict';
 
-var utils = require('../utils/common');
 var contentRepository = require('../data/content-repository');
 var ViewModel = require('../view_models/home');
 
@@ -13,8 +12,7 @@ var HomeController = {
 		}
 
 		contentRepository.get(function(staticData) {
-			var canonicalUrl = utils.getCanonicalUrl(request);
-			var viewModel = new ViewModel(staticData, canonicalUrl);
+			var viewModel = new ViewModel(staticData);
 
 			response.render('index', viewModel);
 		});

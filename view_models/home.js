@@ -1,21 +1,18 @@
 (function () {
   'use strict';
 
-  var utils = require('../utils/common');
   var templateHelpers = require('../templateHelpers.js')();
 
-  function createModel(staticData, canonicalUrl) {
+  function createModel(staticData) {
 
 		return {
 			layout: false,
 			data: staticData,
-			helpers: templateHelpers,
-			canonicalUrl: canonicalUrl,
-			uuid: utils.randomGuid()
+			helpers: templateHelpers
 		};
 	}
 
-	module.exports = function(staticData, canonicalUrl) {
-    return createModel(staticData, canonicalUrl);
+	module.exports = function(staticData) {
+    return createModel(staticData);
   };
 }());
