@@ -1,0 +1,34 @@
+body {
+  background-color: #eee;
+}
+
+.page-title {
+  text-align: center;
+}
+.search-results {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #fff;
+}
+
+.item-listing {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.item-listing__title {
+    font-size: 20px;
+    font-family: Impact, Charcoal, sans-serif;
+    margin: 0;
+}
+
+.item-listing__description {
+  font-size: 16px;
+  font-family: Georgia, serif;
+}
+
+.item-listing__description p {
+  margin: 10px 0;
+}
