@@ -8,15 +8,50 @@
 
 		var _self = this;
 
-		function addPartial(e){
+		function ajaxHelper(url){
+
+
+		}
+
+		function getData(e){
 			var myButton = Object.getOwnPropertyDescriptor(e.target.dataset, 'demoButton');
-			console.log(myButton);
 			if(myButton === undefined) return;
-			//querySelector('[data-demo-button]')
+
+			var request = new XMLHttpRequest();
+			request.open('GET', '/_data/content.json', true);
+
+			request.onload = function() {
+			  if (request.status >= 200 && request.status < 400) {
+			    // Success!
+			    var data = JSON.parse(request.responseText);
+					addPartial(data);
+			  } else {
+			    // We reached our target server, but it returned an error
+					handleError('error');
+			  }
+			};
+
+			request.onerror = function() {
+			  // There was a connection error of some sort
+				handleError('connection error');
+			};
+
+			request.send();
+
+		}
+
+		function handleError(error){
+			console.log(error);
+		}
+
+		function addPartial(data){
 			/* Non nested partial */
 			var template = window.Demo.templates['item-listing'];
 			var container = document.querySelector('[data-item-list]');
-			container.innerHTML += template({title: 'this is a clientside title', description: 'this is a clientside description', linkText: 'clientside button'});
+			for(var i = 0; i < data.length; i++){
+				data[i].linkText = 'Buy now';
+				container.innerHTML += template(data[i]);
+			}
 		}
 
 		function init() {
@@ -27,7 +62,7 @@
 			Handlebars.registerPartial('button/button', window.Demo.templates['button']);
 
 
-			document.addEventListener('click', addPartial);
+			document.addEventListener('click', getData);
 
 		}
 

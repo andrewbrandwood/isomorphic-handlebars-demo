@@ -32,3 +32,8 @@ body {
 .item-listing__description p {
   margin: 10px 0;
 }
+
+.item-listing__image {
+  width: 100%;
+  display: block;
+}

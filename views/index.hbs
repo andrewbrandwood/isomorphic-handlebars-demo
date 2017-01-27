@@ -1,9 +1,20 @@
 {{> header}}
 <h1 class="page-title">Demo for using handlebars clientside and serverside in unison</h1>
 <article class="search-results">
-
+	<div class="search-results__filters">
+		<form>
+			<fieldset>
+				<legend>Filter by colour</legend>
+				<button class="btn btn-filter btn--red">Red Pencils</button>
+				<button class="btn btn-filter btn--green">Green Pencils</button>
+				<button class="btn btn-filter btn--blue">Blue Pencils</button>
+			</fieldset>
+		</form>
+	</div>
 	<div class="item-list" data-item-list>
-		{{> item-listing/item-listing title="This is a title" description="This is a good description of what this is" linkText="Click Me" }}
+		{{#each contentData}}
+		{{> item-listing/item-listing this linkText="Buy now" }}
+		{{/each}}
 	</div>
 </article>
 {{> footer JS=true}}

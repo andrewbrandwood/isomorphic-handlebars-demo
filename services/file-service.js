@@ -3,8 +3,7 @@
 
   var fs = require('fs');
   var path = require('path');
-  var dataDirectory = '../_data/';
-  var rimraf = require('rimraf');
+  var dataDirectory = '../public/_data/';
 
 
   function getAbsoluteFilePath(relativePath) {
@@ -22,37 +21,6 @@
         }
 
         callback(data);
-      });
-    },
-
-    saveDataToFile: function(location, data, callback) {
-
-      var folderPath = path.join(__dirname, dataDirectory);
-      var filePath = getAbsoluteFilePath(location);
-
-      if (!fs.existsSync(folderPath)) {
-        fs.mkdir(folderPath, function() {
-          fs.writeFile(filePath, JSON.stringify(data), callback);
-        });
-      } else {
-        fs.writeFile(filePath, JSON.stringify(data), callback);
-      }
-    },
-
-    deleteFile: function(fileName, callback) {
-      fs.unlink(fileName, function(error){
-        callback(error);
-      });
-    },
-
-    deleteJSONFile: function(location, callback) {
-      this.deleteFile(getAbsoluteFilePath(location),callback);
-    },
-
-    deleteFilesAtPath: function(relativePath, callback) {
-      var folderPath = path.join(__dirname, dataDirectory) + relativePath;
-      rimraf(folderPath, function(error){
-        callback(error);
       });
     }
   };

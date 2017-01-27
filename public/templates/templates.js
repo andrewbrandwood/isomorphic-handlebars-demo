@@ -3,8 +3,12 @@ this["Demo"]["templates"] = this["Demo"]["templates"] || {};
 this["Demo"]["templates"]["item-listing"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var stack1, helper, alias1=depth0 != null ? depth0 : {}, alias2=helpers.helperMissing, alias3="function";
 
-  return "<div class=\"item-listing\">\n  <h2 class=\"item-listing__title\">"
-    + container.escapeExpression(((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper)))
+  return "<div class=\"item-listing\">\n  <figure>\n    <img class=\"item-listing__image\" src=\""
+    + container.escapeExpression(((helper = (helper = helpers.imageUrl || (depth0 != null ? depth0.imageUrl : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"imageUrl","hash":{},"data":data}) : helper)))
+    + "\" alt=\" \" />\n    <figcaption>"
+    + ((stack1 = ((helper = (helper = helpers.imageDescription || (depth0 != null ? depth0.imageDescription : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"imageDescription","hash":{},"data":data}) : helper))) != null ? stack1 : "")
+    + "</figcaption>\n  </figure>\n  <h2 class=\"item-listing__title\">"
+    + ((stack1 = ((helper = (helper = helpers.title || (depth0 != null ? depth0.title : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"title","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "</h2>\n  <div class=\"item-listing__description\">\n    "
     + ((stack1 = ((helper = (helper = helpers.description || (depth0 != null ? depth0.description : depth0)) != null ? helper : alias2),(typeof helper === alias3 ? helper.call(alias1,{"name":"description","hash":{},"data":data}) : helper))) != null ? stack1 : "")
     + "\n  </div>\n"
