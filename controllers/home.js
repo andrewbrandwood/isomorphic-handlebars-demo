@@ -2,8 +2,6 @@
 
 var templateHelpers = require('../templateHelpers.js')();
 var promiseGet = require('request-promise');
-var fs = require('fs');
-var path = require('path');
 
 var HomeController = {
 
@@ -12,33 +10,38 @@ var HomeController = {
 		if (!request.body) {
 			return response.sendStatus(400);
 		}
-		var dataUrl = path.join(__dirname,'../public/_data/content.json');
-		fs.stat(dataUrl, function(err) {
-			var data = null;
-			if (err === null) {
-				data = require(dataUrl);
-			}
+		var colorFilter = request.query.color || 'all';
+		var baseUrl = request.protocol + '://' + request.headers.host + '/search';
+		var query = request.url;
+		console.log(baseUrl + query);
+
+		promiseGet(baseUrl + query).then(function (data) {
 			console.log(data);
 			response.render('index', {
 				layout: false,
 				helpers: templateHelpers,
-				contentData: data
+				contentData: JSON.parse(data)
 			});
-
+		}).catch(function (err) {
+			//console.log(request);
+			response.render('index', {
+			 layout: false,
+			 helpers: templateHelpers,
+			 contentData: 'error'
+		 });
 		});
-		// promiseGet(dataUrl).then(function (data) {
+
+
+		// fs.stat(dataUrl, function(err) {
+		// 	var data = null;
+		// 	if (err === null) {
+		// 		data = require(dataUrl);
+		// 	}
 		// 	response.render('index', {
 		// 		layout: false,
 		// 		helpers: templateHelpers,
-		// 		contentData: JSON.parse(data)
+		// 		contentData: data
 		// 	});
-		// }).catch(function (err) {
-		// 	 console.error(err);
-		// 	 response.render('index', {
-		// 		 layout: false,
-		// 		 helpers: templateHelpers,
-		// 		 contentData: 'no-results'
-		// 	 });
 		// });
 	}
 };
