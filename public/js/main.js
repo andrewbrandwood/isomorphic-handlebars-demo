@@ -16,9 +16,10 @@
 		function getData(e){
 			var myButton = Object.getOwnPropertyDescriptor(e.target.dataset, 'demoButton');
 			if(myButton === undefined) return;
+			var filter = e.target.value;
 
 			var request = new XMLHttpRequest();
-			request.open('GET', '/_data/content.json', true);
+			request.open('GET', '/search/?color=' + filter, true);
 
 			request.onload = function() {
 			  if (request.status >= 200 && request.status < 400) {
@@ -50,7 +51,7 @@
 			var container = document.querySelector('[data-item-list]');
 			for(var i = 0; i < data.length; i++){
 				data[i].linkText = 'Buy now';
-				container.innerHTML += template(data[i]);
+				container.innerHTML = template(data[i]);
 			}
 		}
 

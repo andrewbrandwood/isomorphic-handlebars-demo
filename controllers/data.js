@@ -3,7 +3,7 @@
 var fs = require('fs');
 var path = require('path');
 
-var HomeController = {
+var DataController = {
 
 	get: function(request, response) {
 
@@ -35,4 +35,4 @@ var HomeController = {
 	}
 };
 
-module.exports = HomeController;
+module.exports = DataController;
