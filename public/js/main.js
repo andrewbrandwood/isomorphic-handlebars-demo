@@ -49,9 +49,10 @@
 			/* Non nested partial */
 			var template = window.Demo.templates['item-listing'];
 			var container = document.querySelector('[data-item-list]');
+			container.innerHTML = '';
 			for(var i = 0; i < data.length; i++){
 				data[i].linkText = 'Buy now';
-				container.innerHTML = template(data[i]);
+				container.innerHTML += template(data[i]);
 			}
 		}
 
