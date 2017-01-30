@@ -9,13 +9,13 @@ body {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: #e5e5e5;
 }
 
 .item-listing {
-  margin-bottom: 10px;
-  padding-bottom: 10px;
-  border-bottom: 1px solid #ccc;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #fff;
   display: flex;
   align-items: flex-start;
 }
@@ -23,17 +23,22 @@ body {
 .item-listing__title {
     font-size: 20px;
     font-family: Impact, Charcoal, sans-serif;
-    margin: 0;
+    margin: 0 0 20px;
 }
 
 .item-listing__description {
   font-size: 16px;
   font-family: Georgia, serif;
   flex: 1;
+  color: #4B5263;
 }
 
 .item-listing__description p {
   margin: 10px 0;
+}
+.item-listing__description li {
+  margin: 10px 0;
+  list-style: none;
 }
 
 .item-listing__figure {
@@ -42,4 +47,15 @@ body {
 .item-listing__image {
   width: 100%;
   display: block;
+}
+
+.btn {
+  background-color: #499BD3;
+  color: #fff;
+  padding: 20px 40px;
+  border: 0;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: #272B33;
 }

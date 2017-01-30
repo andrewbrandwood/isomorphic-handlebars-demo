@@ -8,11 +8,6 @@
 
 		var _self = this;
 
-		function ajaxHelper(url){
-
-
-		}
-
 		function getData(e){
 			var myButton = Object.getOwnPropertyDescriptor(e.target.dataset, 'demoButton');
 			if(myButton === undefined) return;
@@ -63,7 +58,7 @@
 			*/
 			Handlebars.registerPartial('button/button', window.Demo.templates['button']);
 
-
+			
 			document.addEventListener('click', getData);
 
 		}
