@@ -1,11 +1,11 @@
 <div class="item-listing">
-  <figure>
+  <figure class="item-listing__figure">
     <img class="item-listing__image" src="{{imageUrl}}" alt=" " />
     <figcaption>{{{imageDescription}}}</figcaption>
   </figure>
-  <h2 class="item-listing__title">{{{title}}}</h2>
   <div class="item-listing__description">
+    <h2 class="item-listing__title">{{{title}}}</h2>
     {{{description}}}
+    {{> button/button buttonText=linkText }}
   </div>
-  {{> button/button buttonText=linkText }}
 </div>

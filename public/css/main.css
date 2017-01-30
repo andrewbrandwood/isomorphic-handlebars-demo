@@ -16,6 +16,8 @@ body {
   margin-bottom: 10px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: flex-start;
 }
 
 .item-listing__title {
@@ -27,12 +29,16 @@ body {
 .item-listing__description {
   font-size: 16px;
   font-family: Georgia, serif;
+  flex: 1;
 }
 
 .item-listing__description p {
   margin: 10px 0;
 }
 
+.item-listing__figure {
+  width: 30%;
+}
 .item-listing__image {
   width: 100%;
   display: block;
