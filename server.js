@@ -6,7 +6,8 @@ var express = require('express'),
 	json = require('express-json'),
 	bodyParser = require('body-parser'),
 	methodOverride = require('express-method-override'),
-	exphbs = require('express-handlebars');
+	exphbs = require('express-handlebars'),
+	templateHelpers = require('./templateHelpers.js')();
 
 var app = express();
 
@@ -20,6 +21,7 @@ app.engine('hbs', exphbs({
 }));
 app.set('view engine', 'hbs');
 app.set('locale', 'en-gb');
+app.set('templateHelpers', templateHelpers)
 app.use(express.static(path.join(__dirname, './public')));
 app.use(logger({path: './logs/logfile.txt'}));
 app.use(json());

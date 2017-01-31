@@ -1,32 +1,34 @@
 'use strict';
 
-var templateHelpers = require('../templateHelpers.js')();
 var promiseGet = require('request-promise');
 
-var HomeController = {
+var HomeController = function(app){
 
-	get: function(request, response) {
+	return {
 
-		if (!request.body) {
-			return response.sendStatus(400);
-		}
-		var colorFilter = request.query.color || 'all';
-		var baseUrl = request.protocol + '://' + request.headers.host + '/search';
-		var query = request.url;
+		get: function(request, response) {
 
-		promiseGet(baseUrl + query).then(function (data) {
-			response.render('index', {
-				layout: false,
-				helpers: templateHelpers,
-				contentData: JSON.parse(data)
+			if (!request.body) {
+				return response.sendStatus(400);
+			}
+			var colorFilter = request.query.color || 'all';
+			var baseUrl = request.protocol + '://' + request.headers.host + '/search';
+			var query = request.url;
+
+			promiseGet(baseUrl + query).then(function (data) {
+				response.render('index', {
+					layout: false,
+					helpers: app.templateHelpers,
+					contentData: JSON.parse(data)
+				});
+			}).catch(function (err) {
+				response.render('index', {
+				 layout: false,
+				 helpers: app.templateHelpers,
+				 contentData: 'error'
+			 });
 			});
-		}).catch(function (err) {
-			response.render('index', {
-			 layout: false,
-			 helpers: templateHelpers,
-			 contentData: 'error'
-		 });
-		});
+		}
 	}
 };
 

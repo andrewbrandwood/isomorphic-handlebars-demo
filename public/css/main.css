@@ -50,7 +50,7 @@ body {
 }
 
 .btn {
-  background-color: #499BD3;
+  background-color: #398DC8;
   color: #fff;
   padding: 20px 40px;
   border: 0;
@@ -58,4 +58,61 @@ body {
 }
 .btn:hover {
   background-color: #272B33;
+}
+
+.filters {
+  background-color: #313D4D;
+  color: #AAB3C0;
+  border: 0;
+  padding: 20px;
+}
+.filters__legend {
+  display: none;
+}
+.filters__title {
+  color: #AAB3C0;
+  font-size: 20px;
+  margin: 0 0 20px;
+}
+.filters__radio {
+  position: absolute;
+  left: -9999em;
+  top: -9999em;
+}
+
+.filters__btn {
+  background-color: #3E4B5C;
+  padding: 20px;
+  cursor: pointer;
+  display: block;
+}
+.filters__btn span {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.filters__btn svg {
+  width: 100%;
+}
+.filters__radio:hover + .filters__btn,
+.filters__radio:checked + .filters__btn {
+  background-color: #232D3A;
+  color: #398DC8;
+}
+.filters__radio:hover + .filters__btn .icon__filter svg,
+.filters__radio:checked + .filters__btn .icon__filter svg {
+  fill: #AAB3C0;
+}
+
+.filters__container {
+  display: flex;
+}
+.filters__col {
+  flex: 1;
+  margin-left: 20px;
+}
+.filters__col:first-child {
+  margin-left: 0;
 }

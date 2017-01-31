@@ -1,19 +1,7 @@
 {{> header}}
 <h1 class="page-title">Demo for using handlebars clientside and serverside in unison</h1>
 <article class="search-results">
-	<div class="search-results__filters">
-		<form>
-			<fieldset>
-				<legend>Filter by colour</legend>
-				<label for="red">Red Pencils</label>
-				<input type="radio" name="colour-filer" id="red" class="btn btn-filter btn--red" value="red" data-demo-button />
-				<label for="green">Green Pencils</label>
-				<input type="radio" name="colour-filer" id="green" class="btn btn-filter btn--green" value="green" data-demo-button />
-				<label for="blue">Blue Pencils</label>
-				<input type="radio" name="colour-filer" id="blue" class="btn btn-filter btn--blue" value="blue" data-demo-button />
-			</fieldset>
-		</form>
-	</div>
+	{{> filters/filters }}
 	<div class="item-list" data-item-list>
 		{{#each contentData}}
 			{{> item-listing/item-listing this linkText="Buy now" }}

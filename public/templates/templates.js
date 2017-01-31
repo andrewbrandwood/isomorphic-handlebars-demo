@@ -18,7 +18,7 @@ this["Demo"]["templates"]["item-listing"] = Handlebars.template({"compiler":[7,"
 this["Demo"]["templates"]["button"] = Handlebars.template({"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
     var helper;
 
-  return "<button>"
+  return "<button class=\"btn\">"
     + container.escapeExpression(((helper = (helper = helpers.buttonText || (depth0 != null ? depth0.buttonText : depth0)) != null ? helper : helpers.helperMissing),(typeof helper === "function" ? helper.call(depth0 != null ? depth0 : {},{"name":"buttonText","hash":{},"data":data}) : helper)))
     + "</button>\n";
 },"useData":true});
