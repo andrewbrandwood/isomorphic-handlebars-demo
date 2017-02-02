@@ -106,6 +106,10 @@ body {
   fill: #AAB3C0;
 }
 
+.js .filters__col--no-js {
+  display: none;
+}
+
 .filters__container {
   display: flex;
 }

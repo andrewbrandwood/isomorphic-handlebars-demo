@@ -1,24 +1,27 @@
 <div class="search-results__filters">
-  <form>
+  <form action="/" method="get">
     <fieldset class="filters">
       <legend class="filters__legend">Filter by colour</legend>
       <h2 class="filters__title">Filter by colour</h2>
       <div class="filters__container">
         <div class="filters__col">
-          <input type="radio" name="colour-filer" id="red" class="filters__radio" value="red" data-demo-button />
+          <input type="radio" name="color" id="red" class="filters__radio" value="red" data-demo-button />
           <label for="red" class="filters__btn">Red Pencils <span class="icon icon__filter">{{> icons/filter }}</span></label>
         </div>
         <div class="filters__col">
-          <input type="radio" name="colour-filer" id="green" class="filters__radio" value="green" data-demo-button />
+          <input type="radio" name="color" id="green" class="filters__radio" value="green" data-demo-button />
           <label for="green" class="filters__btn">Green Pencils <span class="icon icon__filter">{{> icons/filter }}</span></label>
         </div>
         <div class="filters__col">
-          <input type="radio" name="colour-filer" id="blue" class="filters__radio" value="blue" data-demo-button />
+          <input type="radio" name="color" id="blue" class="filters__radio" value="blue" data-demo-button />
           <label for="blue" class="filters__btn">Blue Pencils <span class="icon icon__filter">{{> icons/filter }}</span></label>
         </div>
         <div class="filters__col">
-          <input type="radio" name="colour-filer" id="all" class="filters__radio" value="" data-demo-button />
+          <input type="radio" name="color" id="all" class="filters__radio" value="" data-demo-button />
           <label for="all" class="filters__btn">All Pencils <span class="icon icon__filter">{{> icons/filter }}</span></label>
+        </div>
+        <div class="filters__col filters__col--no-js">
+          <button class="btn filters__btn-submit">Filter results</button>
         </div>
       </div>
     </fieldset>

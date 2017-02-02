@@ -11,6 +11,7 @@
 		function getData(e){
 			var myButton = Object.getOwnPropertyDescriptor(e.target.dataset, 'demoButton');
 			if(myButton === undefined) return;
+
 			var filter = e.target.value;
 
 			var request = new XMLHttpRequest();
@@ -51,15 +52,28 @@
 			}
 		}
 
-		function init() {
+		function registerPartials(){
 			/* Register the partial here as it will we re-used throughout.
 				This is a nested partial within a partial.
 				If a non nested partial then a template model is used.
 			*/
 			Handlebars.registerPartial('button/button', window.Demo.templates['button']);
+		}
 
-			
+		function addEventListeners(){
 			document.addEventListener('click', getData);
+		}
+
+		function addJSHelper(){
+			document.getElementsByTagName('html')[0].classList.add('js');
+		}
+
+		function init() {
+			registerPartials();
+
+			addEventListeners();
+
+			addJSHelper();
 
 		}
 
