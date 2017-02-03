@@ -47,7 +47,6 @@
 			var container = document.querySelector('[data-item-list]');
 			container.innerHTML = '';
 			for(var i = 0; i < data.length; i++){
-				data[i].linkText = 'Buy now';
 				container.innerHTML += template(data[i]);
 			}
 		}
@@ -65,16 +64,14 @@
 		}
 
 		function addJSHelper(){
+			// adds a class to the html element so we can hide element that are not needed when JS is available.
 			document.getElementsByTagName('html')[0].classList.add('js');
 		}
 
 		function init() {
 			registerPartials();
-
 			addEventListeners();
-
 			addJSHelper();
-
 		}
 
 		init();
