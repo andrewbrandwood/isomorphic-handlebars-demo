@@ -23,6 +23,7 @@ var handlebars = require('gulp-handlebars');
 gulp.task('compile-handlebars', function() {
 	//reference to partials and templates.
 	var templatesArr = [
+		'views/_partials/item-listing/item-list.hbs',
 		'views/_partials/item-listing/item-listing.hbs',
 		'views/_partials/button/*.hbs',
 	];

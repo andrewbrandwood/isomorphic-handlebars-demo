@@ -1,5 +1,12 @@
 body {
   background-color: #eee;
+  font-size: 16px;
+  font-family: arial;
+}
+
+button, figure {
+  font-size: 16px;
+  font-family: arial;
 }
 
 .page-title {
@@ -16,21 +23,28 @@ body {
   padding: 20px;
   margin-bottom: 20px;
   background-color: #fff;
-  display: flex;
-  align-items: flex-start;
+}
+@media screen and (min-width:460px){
+  .item-listing {
+    display: flex;
+    align-items: flex-start;
+  }
 }
 
 .item-listing__title {
     font-size: 20px;
-    font-family: Impact, Charcoal, sans-serif;
+    font-family: Georgia, serif;
     margin: 0 0 20px;
 }
 
 .item-listing__description {
-  font-size: 16px;
-  font-family: Georgia, serif;
-  flex: 1;
   color: #4B5263;
+
+}
+@media screen and (min-width:460px){
+  .item-listing__description {
+    flex: 1;
+  }
 }
 
 .item-listing__description p {
@@ -41,8 +55,11 @@ body {
   list-style: none;
 }
 
-.item-listing__figure {
-  width: 30%;
+
+@media screen and (min-width:460px){
+  .item-listing__figure {
+    width: 30%;
+  }
 }
 .item-listing__image {
   width: 100%;
@@ -111,11 +128,19 @@ body {
 }
 
 .filters__container {
-  display: flex;
+  display: block;
 }
-.filters__col {
-  flex: 1;
-  margin-left: 20px;
+
+@media screen and (min-width:460px){
+  .filters__container {
+    display: flex;
+  }
+}
+@media screen and (min-width:460px){
+  .filters__col {
+    margin-left: 20px;
+    flex: 1;
+  }
 }
 .filters__col:first-child {
   margin-left: 0;

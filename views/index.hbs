@@ -2,10 +2,8 @@
 <h1 class="page-title">Demo for using handlebars clientside and serverside in unison</h1>
 <article class="search-results">
 	{{> filters/filters }}
-	<div class="item-list" data-item-list>
-		{{#each contentData}}
-			{{> item-listing/item-listing this linkText="Buy now" }}
-		{{/each}}
+	<div data-item-list>
+		{{> item-listing/item-list }}
 	</div>
 </article>
 {{> footer JS=true}}

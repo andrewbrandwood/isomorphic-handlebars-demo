@@ -43,12 +43,10 @@
 
 		function addPartial(data){
 			/* Non nested partial */
-			var template = window.Demo.templates['item-listing'];
+			var template = window.Demo.templates['item-list'];
 			var container = document.querySelector('[data-item-list]');
 			container.innerHTML = '';
-			for(var i = 0; i < data.length; i++){
-				container.innerHTML += template(data[i]);
-			}
+			container.innerHTML += template({contentData:data});
 		}
 
 		function registerPartials(){
@@ -56,6 +54,7 @@
 				This is a nested partial within a partial.
 				If a non nested partial then a template model is used.
 			*/
+			Handlebars.registerPartial('item-listing/item-listing', window.Demo.templates['item-listing']);
 			Handlebars.registerPartial('button/button', window.Demo.templates['button']);
 		}
 
