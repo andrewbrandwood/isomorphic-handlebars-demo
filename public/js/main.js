@@ -1,5 +1,4 @@
 (function(window, undefined) {
-	/*jshint undef:false*/
 	'use strict';
 
 	function isCorrectButton(e, button){
@@ -12,7 +11,7 @@
 		const filter = e.target.value;
 
 		const request = new XMLHttpRequest();
-		request.open('GET', '/search/?color=' + filter, true);
+		request.open('GET', `/search/?color=${filter}`, true);
 
 		request.onload = () => {
 		  if (request.status >= 200 && request.status < 400) {
@@ -29,9 +28,7 @@
 		  // There was a connection error of some sort
 			handleError('connection error');
 		};
-
 		request.send();
-
 	}
 
 	function handleError(error){
@@ -42,8 +39,7 @@
 		/* Non nested partial */
 		var template = window.Demo.templates['item-list'];
 		var container = document.querySelector('[data-item-list]');
-		container.innerHTML = '';
-		container.innerHTML += template({contentData:data});
+		container.innerHTML = template({contentData:data});
 	}
 
 	function registerPartials(){
@@ -74,5 +70,3 @@
 
 
 })(window);
-
-//# sourceMappingURL=main.js.map
