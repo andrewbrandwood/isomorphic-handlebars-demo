@@ -33,15 +33,16 @@
          * {{ modifierArray modifier 'my-element-class'}}
          */
 
-        modifierArray: function(modifierList, prefix){
-            var arr = modifierList.split(',');
-            var modifierStr = '';
-            for(var i = 0; i < arr.length; i++){
-                modifierStr += prefix + '--' + arr[i] + ' ';
-            }
+         modifierArray: function (modifierList, prefix) {
+           var arr = modifierList.split(',');
+           var modifierStr = '';
+           for(var i = 0; i < arr.length; i++){
+             var modifier = arr[i].replace(/ /g,'');
+             modifierStr += prefix + '--' + modifier + ' ';
+           }
 
-            return modifierStr;
-        },
+           return modifierStr;
+         },
 
         ifCond: function(v1, v2, options) {
           if (v1 === v2) {

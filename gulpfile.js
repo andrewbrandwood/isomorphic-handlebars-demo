@@ -25,7 +25,7 @@ gulp.task('compile-handlebars', function() {
 	var templatesArr = [
 		'views/_partials/item-listing/item-list.hbs',
 		'views/_partials/item-listing/item-listing.hbs',
-		'views/_partials/button/*.hbs',
+		'views/_partials/button/button.hbs',
 	];
 	gulp.src(templatesArr)
 		.pipe(handlebars({handlebars: require('handlebars')}))

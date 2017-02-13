@@ -11,14 +11,13 @@ var HomeController = function(app){
 			if (!request.body) {
 				return response.sendStatus(400);
 			}
-			var colorFilter = request.query.color || 'all';
+
 			var baseUrl = request.protocol + '://' + request.headers.host + '/search';
 			var query = request.url;
-
 			promiseGet(baseUrl + query).then(function (data) {
 				response.render('index', {
 					layout: false,
-					helpers: app.templateHelpers,
+					helpers: app.settings.templateHelpers,
 					contentData: JSON.parse(data)
 				});
 			}).catch(function (err) {
