@@ -70,7 +70,7 @@ To understand where the results come from and the format they are presented in y
 
  Take a look at the `gulpfile.js` in the root.  Here you will see a pre-configured solution to compiling the templates.  However there is a crucial part missing.
 
- ```JavaScript
+ ```js
  gulp.task('compile-handlebars', function() {
  	//reference to partials and templates.
  	var templatesArr = [];
@@ -141,3 +141,17 @@ This is pretty straight forward, but there is one thing to note here.  We have a
 {{> button/button buttonText=linkText }}
 ```
 We are passing down data that has been passed down from a parent partial.  This is here to demonstrate how partials within partials along with dynamic data can be included in an isomorphic solution.
+
+## The client side
+
+Let's get our data first of all through ajax.  Open the file `public/js/main.js`.
+
+We're going to create a function for all of our event listeners.
+
+```js
+function addEventListeners(){
+		document.addEventListener('click', getData);
+	}
+```
+
+put this in `main.js` above the init function and call it in the init.  We are using [Event Delegation](https://davidwalsh.name/event-delegate) here so we are attaching the click event to the body.
