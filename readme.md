@@ -33,7 +33,7 @@ Once you have downloaded the files and run the initial `npm install` command you
 
 * All website assets are created and live in the `public` folder.
 
-* Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder.
+* Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder. Here we're using the [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile our templates.
 
 * Running `npm start` will start your local server on port `3001`
 
@@ -62,3 +62,82 @@ To understand where the results come from and the format they are presented in y
  * [http://localhost:3001/search/?color=red](http://localhost:3001/search/?color=red)  [green, blue]
 
  We will use these urls to make our ajax requests.
+
+ ### Compiling handlebars templates
+ On the server side our Node.js setup handles all the template generation, however in order to get things isomorphic we will need to compile our templates for the client side.
+
+ To do this we are going to use [Gulp](http://gulpjs.com) to generate the templates we require on the client side.  We will be using the  [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile the templates we need.
+
+ Take a look at the `gulpfile.js` in the root.  Here you will see a pre-configured solution to compiling the templates.  However there is a crucial part missing.
+
+ ```JavaScript
+ gulp.task('compile-handlebars', function() {
+ 	//reference to partials and templates.
+ 	var templatesArr = [];
+ 	gulp.src(templatesArr)
+ 		.pipe(handlebars({handlebars: require('handlebars')}))
+ 		.pipe(wrap('Handlebars.template(<%= contents %>)'))
+ 		.pipe(declare({
+ 			namespace: 'Demo.templates',
+ 			noRedeclare: true // Avoid duplicate declarations
+ 		})).pipe(concat('templates.js'))
+ 		.pipe(gulp.dest('public/templates'));
+ });
+
+ ```
+
+ Notice the `templatesArr` is empty.  This is where we are going to build up out references to our partials.
+
+ Take a look at the `index.hbs` file in the `views` folder. This is the core layout page that will be the basis for the HTML output.
+
+ ```HTML
+ {{> header}}
+ <h1 class="page-title">Demo for using handlebars clientside and serverside in unison</h1>
+ <article class="search-results">
+   {{> filters/filters }}
+   <div data-item-list>
+     {{> item-listing/item-list }}
+   </div>
+ </article>
+ {{> footer JS=true  }}
+ ```
+ We are going to be concentrating on the bits that have data attached to them. In this case we need to open the `item-listing/item-list` from the `views/_partials` folder.
+
+ If we open it up we can see a loop
+
+
+ ```HTML
+ <div class="item-list">
+   {{#each contentData}}
+     {{> item-listing/item-listing this linkText="Buy now" }}
+   {{/each}}
+ </div>
+ ```
+ the `contentData` passed into the loop is our data from the api.  This is handled by the Node.js application and is pushed won into the view model. Note the `linkText` attribute.
+
+ We are going to take advantage of this in our client side JavaScript.
+
+ Let's now take a look at the content put out in the loop.  Open up `item-listing/item-listing` from the `views/_partials` folder
+
+in here we will look at the data  and match it up to our json output from the search.
+
+```HTML
+<div class="item-listing">
+  <figure class="item-listing__figure">
+    <img class="item-listing__image" src="{{imageUrl}}" alt=" " />
+    <figcaption>{{{imageDescription}}}</figcaption>
+  </figure>
+  <div class="item-listing__description">
+    <h2 class="item-listing__title">{{{title}}}</h2>
+    {{{description}}}
+    {{> button/button buttonText=linkText }}
+  </div>
+</div>
+```
+
+This is pretty straight forward, but there is one thing to note here.  We have a partial within a partial.  
+
+```
+{{> button/button buttonText=linkText }}
+```
+We are passing down data that has been passed down from a parent partial.  This is here to demonstrate how partials within partials along with dynamic data can be included in an isomorphic solution.
