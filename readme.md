@@ -36,3 +36,29 @@ Once you have downloaded the files and run the initial `npm install` command you
 * Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder.
 
 * Running `npm start` will start your local server on port `3001`
+
+___
+
+## Let's begin
+
+If you haven't already, run `gulp` and `npm start` to get the initial website built.
+
+Open `http://localhost:3001` to view the website.
+
+You'll see a results page showing all coloured pencils. A filter bar at the top works by choosing an option and pressing the filter results button.
+
+You'll notice this is currently all done with a page refresh.  
+
+The functionality currently is done server side by hitting an API to return results.
+
+### understanding the results
+
+To understand where the results come from and the format they are presented in you can hit the url following urls
+
+ * All results - [http://localhost:3001/search/](http://localhost:3001/search/)
+
+ by adding a `color` query string parameter you can get specific colours
+
+ * [http://localhost:3001/search/?color=red](http://localhost:3001/search/?color=red)  [green, blue]
+
+ We will use these urls to make our ajax requests.
