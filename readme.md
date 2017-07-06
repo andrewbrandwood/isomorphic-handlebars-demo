@@ -61,7 +61,7 @@ To understand where the results come from and the format they are presented in y
 
  * [http://localhost:3001/search/?color=red](http://localhost:3001/search/?color=red)  [green, blue]
 
- We will use these urls to make our ajax requests.
+We will use these urls to make our ajax requests.
 
  ### Compiling handlebars templates
  On the server side our Node.js setup handles all the template generation, however in order to get things isomorphic we will need to compile our templates for the client side.
@@ -149,9 +149,62 @@ Let's get our data first of all through ajax.  Open the file `public/js/main.js`
 We're going to create a function for all of our event listeners.
 
 ```js
-function addEventListeners(){
-		document.addEventListener('click', getData);
+(function(window, undefined) {
+	'use strict';
+
+	function addEventListeners(){
+			document.addEventListener('click', getData);
+		}
+
+	function init() {
+		addEventListeners();
+	}
+
+	init();
+
+})(window);
+```
+
+put this in `main.js` above the `init` function and call it in the init.  We are using [Event Delegation](https://davidwalsh.name/event-delegate) here so we are attaching the click event to the body.
+
+Next we will handle that event and retrieve the data using the getData function.
+
+```js
+
+function isCorrectButton(e, button){
+  return Object.getOwnPropertyDescriptor(e.target.dataset, button) === undefined ? false : true;
+}
+
+
+function getData(e){
+		if (!isCorrectButton(e, 'demoButton')) return;
+
+		const filter = e.target.value;
+
+		const request = new XMLHttpRequest();
+		request.open('GET', `/search/?color=${filter}`, true);
+
+		request.onload = () => {
+		  if (request.status >= 200 && request.status < 400) {
+		    // Success!
+		    const data = JSON.parse(request.responseText);
+				addPartial(data);
+		  } else {
+		    // We reached our target server, but it returned an error
+				handleError('error');
+		  }
+		};
+
+		request.onerror = () => {
+		  // There was a connection error of some sort
+			handleError('connection error');
+		};
+		request.send();
 	}
 ```
 
-put this in `main.js` above the init function and call it in the init.  We are using [Event Delegation](https://davidwalsh.name/event-delegate) here so we are attaching the click event to the body.
+First we need to handle click using event delegation. We check if it's the button we are expecting. if not then we do nothing and return out of the function.
+
+Having clicked the correct button (one of the filters) we then send an ajax request to the search page updating the query string with the value of our filter.
+
+The handle `error` function is a simple console output for the purpose of this demo.
