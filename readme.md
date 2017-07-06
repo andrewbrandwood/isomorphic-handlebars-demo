@@ -208,3 +208,93 @@ First we need to handle click using event delegation. We check if it's the butto
 Having clicked the correct button (one of the filters) we then send an ajax request to the search page updating the query string with the value of our filter.
 
 The handle `error` function is a simple console output for the purpose of this demo.
+
+## The interesting bit.
+
+Adding the partial using the addPartial function is where *some* of the magic happens.
+
+```js
+function addPartial(data){
+		/* Non nested partial */
+		var template = window.Demo.templates['item-list'];
+		var container = document.querySelector('[data-item-list]');
+		container.innerHTML = template({contentData:data});
+	}
+```
+
+If you are familiar with handlebars on the client side this will look familiar.  The difference here is our initial template declaration is referencing an object rather than building some HTML to put into the page.
+
+That object holds the reference to our HTML partial `item-list` from our `_partials` folder.
+
+This object is generated from our gulp task.  Our gulp task currently has an empty `templatesArr`.
+
+Putting the reference to the partial required in the `templatesArr` will create that object and create a `templates.js` file in the public folder.
+
+`'views/_partials/item-listing/item-list.hbs'`
+
+Running gulp now will produce the `template.js` in a `templates folder` and should look like this
+
+```js
+this["Demo"] = this["Demo"] || {};
+this["Demo"]["templates"] = this["Demo"]["templates"] || {};
+this["Demo"]["templates"]["item-list"] = Handlebars.template({"1":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return ((stack1 = container.invokePartial(partials["item-listing/item-listing"],depth0,{"name":"item-listing/item-listing","hash":{"linkText":"Buy now"},"data":data,"indent":"    ","helpers":helpers,"partials":partials,"decorators":container.decorators})) != null ? stack1 : "");
+},"compiler":[7,">= 4.0.0"],"main":function(container,depth0,helpers,partials,data) {
+    var stack1;
+
+  return "<div class=\"item-list\">\n"
+    + ((stack1 = helpers.each.call(depth0 != null ? depth0 : (container.nullContext || {}),(depth0 != null ? depth0.contentData : depth0),{"name":"each","hash":{},"fn":container.program(1, data, 0),"inverse":container.noop,"data":data})) != null ? stack1 : "")
+    + "</div>\n";
+},"usePartial":true,"useData":true});
+```
+
+### Nearly done.
+If you try to run the project in your browser you will notice something isn't quite right.  We have the following error
+
+```js
+handlebars.runtime-v4.0.5.js:1185 Uncaught
+Exception {description: undefined, fileName: undefined, lineNumber: undefined, message: "The partial item-listing/item-listing could not be found", name: "Error"…}
+```
+
+### The important part that makes it all work
+
+If we take a look at the partial `item-list` we can see that it includes a partial.  Handlebars requires us to register those partials as partials, not as templates.  
+
+This is a simple step that allows us to include partials within partials and pass the data down through them all.
+
+There are 2 steps to this
+
+1. As before we need to create a reference in your gulp task.  Add the partial `item-listing` and don't forget within there you have another partial `button`.  Add that reference also.
+
+you will then have a templatesArr that looks something like this.
+
+```js
+var templatesArr = [
+		'views/_partials/item-listing/item-list.hbs',
+		'views/_partials/item-listing/item-listing.hbs',
+		'views/_partials/button/button.hbs'
+	];
+```
+2. We need to register our partial to bind that reference to the object created in step one.
+
+```js
+function registerPartials(){
+		Handlebars.registerPartial('item-listing/item-listing', window.Demo.templates['item-listing']);
+		Handlebars.registerPartial('button/button', window.Demo.templates['button']);
+	}
+```
+Call the registerPartial in the `init` function.  Run gulp and test your project.
+
+### Final bit of UX
+
+As we are now updating the filters imediately on click of the filter, there is no need for the `Filter results` button.
+
+```js
+  document.getElementsByTagName('html')[0].classList.add('js');
+```
+
+Adding a class of `js` to the body of the document will allow you to hide the button when JavaScript is enabled.
+
+## Conclusion
