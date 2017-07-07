@@ -1,5 +1,12 @@
 # Isomorphic handlebars demo
-A demo to illustrate how to use handlebars partials in unison client side & server side. Avoiding writing any HTML in your JavaScript file.
+
+This tutorial will demonstrate a simple search results page with ajax filters. Using a setup where the same [handlebarsjs](http://handlebarsjs.com/) template is used on the server side as the client side.
+
+Often when using ajax and a templating engine there is duplication of code. Server side code for non javascript output and client side to handle requests through JavaScript and ajax.
+
+This tutorial will guide you through a common scenario of filtering search results using handlebars templates.  The outcome will be a solution that avoids writing HTML in your JavaScript file.
+
+The tutorial uses Node.js for the server application taking advantage of express for ease of setup. The setup here is purely for demonstration purposes. This tutorial will not cover [Node.js server setup, you can learn more about that here](https://nodejs.org).
 
 ## Prerequisites
 * [Node.js](https://nodejs.org)
@@ -8,16 +15,6 @@ A demo to illustrate how to use handlebars partials in unison client side & serv
 ## Install
 * clone the project files.
 * Run `npm install` to setup.
-
-## Introduction
-
-This is a tutorial on creating a handlebars templated setup where the same template is used on the server side as the client side.
-
-Often when using a templating engine there is duplication of code. Server side code for non javascript browsers. and client side to handle requests through javascript and ajax.
-
-This tutorial will guide you through a common scenario of filtering search results using handlebars templates.  The outcome will be an ajax filtering system that works server side avoiding writing any HTML in your JavaScript file.
-
-The tutorial uses Node.js for the server application taking advantage of express for ease of setup.  You may choose any other server setup.  The setup here is purely for demonstration purposes. This tutorial will not cover [Node.js server setup, you can learn more about that here](https://nodejs.org).
 
 ___
 
@@ -33,7 +30,7 @@ Once you have downloaded the files and run the initial `npm install` command you
 
 * All website assets are created and live in the `public` folder.
 
-* Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder. Here we're using the [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile our templates.
+* Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder by using the [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile our templates for the client side. Server side templating is defined in the `server.js`
 
 * Running `npm start` will start your local server on port `3001`
 
@@ -47,13 +44,11 @@ Open `http://localhost:3001` to view the website.
 
 You'll see a results page showing all coloured pencils. A filter bar at the top works by choosing an option and pressing the filter results button.
 
-You'll notice this is currently all done with a page refresh.  
-
-The functionality currently is done server side by hitting an API to return results.
+You'll notice this is currently all done with a page refresh and doesn't use JavaScript at this stage.  
 
 ### understanding the results
 
-To understand where the results come from and the format they are presented in you can hit the url following urls
+To understand the results and where they come from, hit any of the following urls.
 
  * All results - [http://localhost:3001/search/](http://localhost:3001/search/)
 
@@ -61,12 +56,11 @@ To understand where the results come from and the format they are presented in y
 
  * [http://localhost:3001/search/?color=red](http://localhost:3001/search/?color=red)  [green, blue]
 
-We will use these urls to make our ajax requests.
 
- ### Compiling handlebars templates
- On the server side our Node.js setup handles all the template generation, however in order to get things isomorphic we will need to compile our templates for the client side.
+### Compiling handlebars templates
+ On the server side the Node.js setup handles all the template generation, however in order to get things isomorphic we will need to compile the templates for the client side. To do this we are going to use [Gulp](http://gulpjs.com) as the task runner.  
 
- To do this we are going to use [Gulp](http://gulpjs.com) to generate the templates we require on the client side.  We will be using the  [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile the templates we need.
+ We will be using the  [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile the templates we need.
 
  Take a look at the `gulpfile.js` in the root.  Here you will see a pre-configured solution to compiling the templates.  However there is a crucial part missing.
 
@@ -86,7 +80,7 @@ We will use these urls to make our ajax requests.
 
  ```
 
- Notice the `templatesArr` is empty.  This is where we are going to build up out references to our partials.
+ Notice the `templatesArr` is empty.  This is where we are going to add references to our partials.
 
  Take a look at the `index.hbs` file in the `views` folder. This is the core layout page that will be the basis for the HTML output.
 
@@ -99,12 +93,9 @@ We will use these urls to make our ajax requests.
      {{> item-listing/item-list }}
    </div>
  </article>
- {{> footer JS=true  }}
+ {{> footer }}
  ```
  We are going to be concentrating on the bits that have data attached to them. In this case we need to open the `item-listing/item-list` from the `views/_partials` folder.
-
- If we open it up we can see a loop
-
 
  ```HTML
  <div class="item-list">
@@ -113,13 +104,13 @@ We will use these urls to make our ajax requests.
    {{/each}}
  </div>
  ```
- the `contentData` passed into the loop is our data from the api.  This is handled by the Node.js application and is pushed won into the view model. Note the `linkText` attribute.
+ The file contains a loop where `contentData` is used. `contentData` is the data from the api.  For the server side this is handled by the Node.js application and is pushed won into the view model. Note the `linkText` attribute.
 
  We are going to take advantage of this in our client side JavaScript.
 
- Let's now take a look at the content put out in the loop.  Open up `item-listing/item-listing` from the `views/_partials` folder
+ Let's now take a look at the content in the loop.  Open up `item-listing/item-listing` from the `views/_partials` folder
 
-in here we will look at the data  and match it up to our json output from the search.
+The `json` output from the search should match the references in this partial.
 
 ```HTML
 <div class="item-listing">
