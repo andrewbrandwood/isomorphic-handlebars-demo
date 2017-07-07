@@ -126,18 +126,24 @@ The `json` output from the search should match the references in this partial.
 </div>
 ```
 
-This is pretty straight forward, but there is one thing to note here.  We have a partial within a partial.  
+This is pretty straight forward, but there is one thing to note here.  There is a partial within a partial.  
 
 ```
 {{> button/button buttonText=linkText }}
 ```
-We are passing down data that has been passed down from a parent partial.  This is here to demonstrate how partials within partials along with dynamic data can be included in an isomorphic solution.
+We are passing down data that has been passed down from a parent partial.  This is here to demonstrate how partials within partials along with dynamic data can be included in an isomorphic solution.  
+
+The parent partial passes a default value `linkText="Buy now"`
+
+Results from the json overwrite `linkText` if it exists.
 
 ## The client side
 
-Let's get our data first of all through ajax.  Open the file `public/js/main.js`.
+We are going to hook up the results to an ajax request.
 
-We're going to create a function for all of our event listeners.
+Open the file `public/js/main.js`.
+
+Create a function for the event listeners.
 
 ```js
 (function(window, undefined) {
@@ -156,7 +162,7 @@ We're going to create a function for all of our event listeners.
 })(window);
 ```
 
-put this in `main.js` above the `init` function and call it in the init.  We are using [Event Delegation](https://davidwalsh.name/event-delegate) here so we are attaching the click event to the body.
+We are using [Event Delegation](https://davidwalsh.name/event-delegate) method here so we are attaching the click event to the body.
 
 Next we will handle that event and retrieve the data using the getData function.
 
@@ -194,36 +200,33 @@ function getData(e){
 	}
 ```
 
-First we need to handle click using event delegation. We check if it's the button we are expecting. if not then we do nothing and return out of the function.
+First we need to handle click using event delegation, check if it's the button we are expecting. if not, do nothing and return out of the function.
 
-Having clicked the correct button (one of the filters) we then send an ajax request to the search page updating the query string with the value of our filter.
+Having clicked the correct button (one of the filters) we send an ajax request to the search page. The query string is populated with the value of our filter.
 
-The handle `error` function is a simple console output for the purpose of this demo.
+The `handleError` function is a simple console output for the purpose of this demo.
 
 ## The interesting bit.
 
-Adding the partial using the addPartial function is where *some* of the magic happens.
+Adding the partial using the `addPartial` function is where *some* of the magic happens.
 
 ```js
 function addPartial(data){
-		/* Non nested partial */
 		var template = window.Demo.templates['item-list'];
 		var container = document.querySelector('[data-item-list]');
 		container.innerHTML = template({contentData:data});
 	}
 ```
 
-If you are familiar with handlebars on the client side this will look familiar.  The difference here is our initial template declaration is referencing an object rather than building some HTML to put into the page.
+If you are familiar with handlebars on the client side this will look familiar.  The difference here is the initial template declaration is referencing an object. No HTML is created with JavaScript.
 
 That object holds the reference to our HTML partial `item-list` from our `_partials` folder.
 
-This object is generated from our gulp task.  Our gulp task currently has an empty `templatesArr`.
-
-Putting the reference to the partial required in the `templatesArr` will create that object and create a `templates.js` file in the public folder.
+The object is generated from the gulp task in `gulpfile.js`.
 
 `'views/_partials/item-listing/item-list.hbs'`
 
-Running gulp now will produce the `template.js` in a `templates folder` and should look like this
+Putting the reference to the partial required in the `templatesArr` will create an object in a file called `templates.js`. Run `gulp` to create the file that is generated in `public/templates` folder.
 
 ```js
 this["Demo"] = this["Demo"] || {};
@@ -242,7 +245,7 @@ this["Demo"]["templates"]["item-list"] = Handlebars.template({"1":function(conta
 ```
 
 ### Nearly done.
-If you try to run the project in your browser you will notice something isn't quite right.  We have the following error
+Open the webpage. You will notice something isn't quite right.  The following error is produced.
 
 ```js
 handlebars.runtime-v4.0.5.js:1185 Uncaught
@@ -251,15 +254,15 @@ Exception {description: undefined, fileName: undefined, lineNumber: undefined, m
 
 ### The important part that makes it all work
 
-If we take a look at the partial `item-list` we can see that it includes a partial.  Handlebars requires us to register those partials as partials, not as templates.  
+Look at the partial `item-list`. It includes a partial.  Handlebars requires us to register those partials.  
 
-This is a simple step that allows us to include partials within partials and pass the data down through them all.
+This is a simple step that allows us to include partials within partials which can utilise the data.
 
-There are 2 steps to this
+There are 2 steps to this.
 
-1. As before we need to create a reference in your gulp task.  Add the partial `item-listing` and don't forget within there you have another partial `button`.  Add that reference also.
+1. Create a reference in your gulp task.  Add the partial `item-listing`. Don't forget within there you have another partial `button`.  Add that reference also.
 
-you will then have a templatesArr that looks something like this.
+The `templatesArr` should look like this.
 
 ```js
 var templatesArr = [
@@ -268,7 +271,10 @@ var templatesArr = [
 		'views/_partials/button/button.hbs'
 	];
 ```
-2. We need to register our partial to bind that reference to the object created in step one.
+
+*Be careful to only identify the templates you need as `templates.js` is referenced at runtime. This is an extra resource the client needs to download*
+
+2. In `main.js` register the partial to bind the reference to the object.
 
 ```js
 function registerPartials(){
@@ -276,16 +282,16 @@ function registerPartials(){
 		Handlebars.registerPartial('button/button', window.Demo.templates['button']);
 	}
 ```
-Call the registerPartial in the `init` function.  Run gulp and test your project.
+Call the `registerPartial` in the `init` function.  
+
+Run gulp and test your project.
 
 ### Final bit of UX
 
-As we are now updating the filters imediately on click of the filter, there is no need for the `Filter results` button.
+As we are now updating the filters immediately on click of the filter, there is no need for the `Filter results` button.
 
 ```js
   document.getElementsByTagName('html')[0].classList.add('js');
 ```
 
 Adding a class of `js` to the body of the document will allow you to hide the button when JavaScript is enabled.
-
-## Conclusion
