@@ -61,9 +61,12 @@
 	}
 
 	function init() {
+		registerPartials();
 		addEventListeners();
+		addJSHelper();
 	}
 
 	init();
+
 
 })(window);
