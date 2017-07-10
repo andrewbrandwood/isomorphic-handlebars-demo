@@ -16,6 +16,8 @@ The tutorial uses Node.js for the server application taking advantage of express
 * clone the project files.
 * Run `npm install` to setup.
 
+If you can't be bothered and just want to look through the completed files, check out the [complete](https://github.com/andrewbrandwood/isomorphic-handlebars-demo/tree/complete) branch of this repo.
+
 ___
 
 ## Getting started
@@ -295,3 +297,5 @@ As we are now updating the filters immediately on click of the filter, there is 
 ```
 
 Adding a class of `js` to the body of the document will allow you to hide the button when JavaScript is enabled.
+
+You can download the completed files by checking out the [complete](https://github.com/andrewbrandwood/isomorphic-handlebars-demo/tree/complete) branch of this repo.
