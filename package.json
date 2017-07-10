@@ -4,7 +4,8 @@
   "description": "A demo to illustrate how to use handlebars partials in unison clientside & serverside",
   "license": "ISC",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "postinstall": "gulp"
   },
   "dependencies": {
     "body-parser": "^1.11.0",

@@ -1,43 +1,19 @@
-# Isomorphic handlebars demo
-
-This tutorial will demonstrate a simple search results page with ajax filters. Using a setup where the same [handlebarsjs](http://handlebarsjs.com/) template is used on the server side as the client side.
-
-Often when using ajax and a templating engine there is duplication of code. Server side code for non javascript output and client side to handle requests through JavaScript and ajax.
-
-This tutorial will guide you through a common scenario of filtering search results using handlebars templates.  The outcome will be a solution that avoids writing HTML in your JavaScript file.
-
-The tutorial uses Node.js for the server application taking advantage of express for ease of setup. The setup here is purely for demonstration purposes. This tutorial will not cover [Node.js server setup, you can learn more about that here](https://nodejs.org).
+# handlebars-demo
+A demo to illustrate how to use handlebars partials in unison clientside & serverside
 
 ## Prerequisites
-* [Node.js](https://nodejs.org)
-* [Gulp](http://gulpjs.com)
+* Node & NPM installed
 
 ## Install
-* clone the project files.
-* Run `npm install` to setup.
-
-___
+* Checkout the project from Bitbucket.
+* Run `npm install` to setup Cartridge & Gulp.
 
 If you can't be bothered going through the tutorial and just want to look through the completed files, check out the [complete](https://github.com/andrewbrandwood/isomorphic-handlebars-demo/tree/complete) branch of this repo.
 
 ___
 
 ## Getting started
-
-Once you have downloaded the files and run the initial `npm install` command you should have all the files necessary to complete this tutorial.
-
-### Finding your way around.
-
-* All the HTML files are constructed from handlebars templates (`.hbs`) and live in the `views` folder.
-
-* Constructed HTML files are published into the root of the `public` folder.
-
-* All website assets are created and live in the `public` folder.
-
-* Running `gulp` in the terminal window will generate an HTML index in the root of the `public` folder by using the [gulp-handlebars](https://www.npmjs.com/package/gulp-handlebars) package to compile our templates for the client side. Server side templating is defined in the `server.js`
-
-* Running `npm start` will start your local server on port `3001`
-
+To compile the handlebars pre-compiled templates needed run `gulp` from the command line in the project root.
 ___
 
 ## Let's begin
